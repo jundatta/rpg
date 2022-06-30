@@ -7,6 +7,7 @@
 // Javaでゲームを作る（後編）！
 //   https://www.youtube.com/watch?v=CPtEV8aygXI
 // 【移植】PC-8001（TN8001）様
+// https://gist.github.com/TN8001/7b65499db03af5230f5c39001e70a32e
 
 
 // [【プログラム】Javaでゲームを作る（後編）！Javaで「簡単なRPG」を作るためのプログラム方法について解説！初級者向けです。☆プログラミング☆ゲーム☆java - YouTube](https://www.youtube.com/watch?v=CPtEV8aygXI)
