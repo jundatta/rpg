@@ -1,12 +1,11 @@
 // 【作者】グァン・ファンミン（電子科）さん
-// 【作品名】RPG1？
 // Javaでゲームを作る（前編）！
 //   https://www.youtube.com/watch?v=Cy5IqYeqiIo
 // Javaでゲームを作る（中編）！
 //   https://www.youtube.com/watch?v=XnaTvzn7UPU
 // Javaでゲームを作る（後編）！
 //   https://www.youtube.com/watch?v=CPtEV8aygXI
-// 【移植】PC-8001（TN8001）様
+// 【移植】TN8001（PC-8001）さん
 // https://gist.github.com/TN8001/7b65499db03af5230f5c39001e70a32e
 
 
