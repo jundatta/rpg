@@ -12,18 +12,6 @@
 // [【プログラム】Javaでゲームを作る（後編）！Javaで「簡単なRPG」を作るためのプログラム方法について解説！初級者向けです。☆プログラミング☆ゲーム☆java - YouTube](https://www.youtube.com/watch?v=CPtEV8aygXI)
 
 
-// [キャラクターチップ１ - ぴぽや倉庫](https://pipoya.net/sozai/assets/charachip/character-chip-1/)
-// キャラチップ.zip
-//    pipo-charachip018a.png
-//    pipo-charachip019e.png
-//    pipo-charachip029d.png
-//
-// [マップチップ　32×32～ - ぴぽや倉庫](https://pipoya.net/sozai/assets/map-chip_tileset32/)
-// ウディタ2_32x32mapchip_20210215.zip
-//    [Base]BaseChip_pipo.png
-//    [A]Water2_pipo.png
-
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.*;
@@ -117,7 +105,7 @@ public class RPG1 extends Frame implements Runnable {
         setVisible(true);
 
         var i = getInsets();
-        setSize(288 + i.left + i.right, 288 + i.top + i.bottom);
+        setSize(144 + i.left + i.right, 144 + i.top + i.bottom);
     }
 
     public void init() {
@@ -161,8 +149,8 @@ public class RPG1 extends Frame implements Runnable {
 
         x = 18;
         y = 18;
-        tx = 128;
-        ty = 128;
+        tx = 64;
+        ty = 64;
 
         teki1 = teki2 = true;
 
@@ -234,7 +222,7 @@ public class RPG1 extends Frame implements Runnable {
             gameThread = new Thread(this);
             gameThread.start();
 
-            buf = createImage(288, 288);
+            buf = createImage(144, 144);
         }
     }
 
@@ -318,37 +306,37 @@ public class RPG1 extends Frame implements Runnable {
             for (j = 0; j < 9; j++) {
                 a = map[y - 4 + j][x - 4 + i];
                 if (a == 0) {
-                    ct.drawImage(haikei[0], i * 32, j * 32, this);
+                    ct.drawImage(haikei[0], i * 16, j * 16, this);
                 } else if (a == 1) {
-                    ct.drawImage(haikei[1], i * 32, j * 32, this);
+                    ct.drawImage(haikei[1], i * 16, j * 16, this);
                 } else if (a == 2) {
-                    ct.drawImage(haikei[2], i * 32, j * 32, this);
+                    ct.drawImage(haikei[2], i * 16, j * 16, this);
                 } else if (a == 3) {
-                    ct.drawImage(haikei[3], i * 32, j * 32, this);
+                    ct.drawImage(haikei[3], i * 16, j * 16, this);
                 } //
                 else if (a == 4) {
-                    if (teki1) ct.drawImage(teki_1, i * 32, j * 32, this);
-                    else ct.drawImage(haikei[0], i * 32, j * 32, this);
+                    if (teki1) ct.drawImage(teki_1, i * 16, j * 16, this);
+                    else ct.drawImage(haikei[0], i * 16, j * 16, this);
                 } //
                 else if (a == 5) {
-                    if (teki2) ct.drawImage(haikei[4], i * 32, j * 32, this);
-                    else ct.drawImage(haikei[0], i * 32, j * 32, this);
+                    if (teki2) ct.drawImage(haikei[4], i * 16, j * 16, this);
+                    else ct.drawImage(haikei[0], i * 16, j * 16, this);
                 } //
                 else if (a == 6) {
-                    if (ken2flag == false) ct.drawImage(bnf, i * 32, j * 32, this);
-                    else ct.drawImage(haikei[0], i * 32, j * 32, this);
+                    if (ken2flag == false) ct.drawImage(bnf, i * 16, j * 16, this);
+                    else ct.drawImage(haikei[0], i * 16, j * 16, this);
                 } //
                 else if (a == 7) {
                     if (ken1flag == false && ken2flag == false)
-                        ct.drawImage(nf, i * 32, j * 32, this);
-                    else ct.drawImage(haikei[0], i * 32, j * 32, this);
+                        ct.drawImage(nf, i * 16, j * 16, this);
+                    else ct.drawImage(haikei[0], i * 16, j * 16, this);
                 } //
                 else if (a == 8) {
-                    if (goal == false) ct.drawImage(haikei[0], i * 32, j * 32, this);
-                    else ct.drawImage(haikei[5], i * 32, j * 32, this);
+                    if (goal == false) ct.drawImage(haikei[0], i * 16, j * 16, this);
+                    else ct.drawImage(haikei[5], i * 16, j * 16, this);
                 } //
                 else if (a == 9) {
-                    ct.drawImage(charact1, i * 32, j * 32, this);
+                    ct.drawImage(charact1, i * 16, j * 16, this);
                 }
             }
         }
@@ -356,36 +344,36 @@ public class RPG1 extends Frame implements Runnable {
 
         if (keyDirection == 1) {
             if (keySpace == true && ken1flag == true)
-                ct.drawImage(nf_u, tx, ty - 32, this);
+                ct.drawImage(nf_u, tx, ty - 16, this);
         }
         if (keyDirection == 2) {
             if (keySpace == true && ken1flag == true)
-                ct.drawImage(nf_d, tx, ty + 32, this);
+                ct.drawImage(nf_d, tx, ty + 16, this);
         }
         if (keyDirection == 3) {
             if (keySpace == true && ken1flag == true)
-                ct.drawImage(nf_r, tx + 32, ty, this);
+                ct.drawImage(nf_r, tx + 16, ty, this);
         }
         if (keyDirection == 4) {
             if (keySpace == true && ken1flag == true)
-                ct.drawImage(nf_l, tx - 32, ty, this);
+                ct.drawImage(nf_l, tx - 16, ty, this);
         }
 
         if (keyDirection == 1) {
             if (keySpace == true && ken2flag == true)
-                ct.drawImage(bnf_u, tx, ty - 32, this);
+                ct.drawImage(bnf_u, tx, ty - 16, this);
         }
         if (keyDirection == 2) {
             if (keySpace == true && ken2flag == true)
-                ct.drawImage(bnf_d, tx, ty + 32, this);
+                ct.drawImage(bnf_d, tx, ty + 16, this);
         }
         if (keyDirection == 3) {
             if (keySpace == true && ken2flag == true)
-                ct.drawImage(bnf_r, tx + 32, ty, this);
+                ct.drawImage(bnf_r, tx + 16, ty, this);
         }
         if (keyDirection == 4) {
             if (keySpace == true && ken2flag == true)
-                ct.drawImage(bnf_l, tx - 32, ty, this);
+                ct.drawImage(bnf_l, tx - 16, ty, this);
         }
 
 
@@ -393,62 +381,62 @@ public class RPG1 extends Frame implements Runnable {
         else anime = true;
 
         if (keySpace == false && keyDirection == 1)
-            if (anime) ct.drawImage(a_u1, 128, 128, this);
-            else ct.drawImage(a_u2, 128, 128, this);
+            if (anime) ct.drawImage(a_u1, 64, 64, this);
+            else ct.drawImage(a_u2, 64, 64, this);
         if (keySpace == false && keyDirection == 2)
-            if (anime) ct.drawImage(a_d1, 128, 128, this);
-            else ct.drawImage(a_d2, 128, 128, this);
+            if (anime) ct.drawImage(a_d1, 64, 64, this);
+            else ct.drawImage(a_d2, 64, 64, this);
         if (keySpace == false && keyDirection == 3)
-            if (anime) ct.drawImage(a_r1, 128, 128, this);
-            else ct.drawImage(a_r2, 128, 128, this);
+            if (anime) ct.drawImage(a_r1, 64, 64, this);
+            else ct.drawImage(a_r2, 64, 64, this);
         if (keySpace == false && keyDirection == 4)
-            if (anime) ct.drawImage(a_l1, 128, 128, this);
-            else ct.drawImage(a_l2, 128, 128, this);
+            if (anime) ct.drawImage(a_l1, 64, 64, this);
+            else ct.drawImage(a_l2, 64, 64, this);
 
 
         if (keySpace == true && keyDirection == 1)
-            ct.drawImage(a_nu, 128, 128, this);
+            ct.drawImage(a_nu, 64, 64, this);
         if (keySpace == true && keyDirection == 2)
-            ct.drawImage(a_nd, 128, 128, this);
+            ct.drawImage(a_nd, 64, 64, this);
         if (keySpace == true && keyDirection == 3)
-            ct.drawImage(a_nr, 128, 128, this);
+            ct.drawImage(a_nr, 64, 64, this);
         if (keySpace == true && keyDirection == 4)
-            ct.drawImage(a_nl, 128, 128, this);
+            ct.drawImage(a_nl, 64, 64, this);
 
 
         if (keyDirection == 1 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ゴール", 110, 100);
+            ct.drawString("ゴール", 55, 50);
         }
         if (keyDirection == 2 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ゴール", 110, 100);
+            ct.drawString("ゴール", 55, 50);
         }
         if (keyDirection == 3 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ゴール", 110, 100);
+            ct.drawString("ゴール", 55, 50);
         }
         if (keyDirection == 4 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ゴール", 110, 100);
+            ct.drawString("ゴール", 55, 50);
         }
 
 
         if (keyDirection == 1 && map[y - 1][x] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("こんにちは、少尉。", 50, 100);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
         if (keyDirection == 2 && map[y + 1][x] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("こんにちは、少尉。", 50, 100);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
         if (keyDirection == 3 && map[y][x + 1] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("こんにちは、少尉。", 50, 100);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
         if (keyDirection == 4 && map[y][x - 1] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("こんにちは、少尉。", 50, 100);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
 
         var i = getInsets();
