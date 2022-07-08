@@ -93,7 +93,6 @@ public class RPG1 extends Frame implements Runnable {
 
         addWindowListener(new WindowAdapter() {
             @Override public void windowOpened(WindowEvent e) {
-            	System.out.println(System.getProperty("file.encoding"));
                 start();
             }
 
@@ -302,10 +301,6 @@ public class RPG1 extends Frame implements Runnable {
         paint(g);
     }
 
-	private String cnvStr(String utf8) {
-		return utf8;
-	}
-	
     public void paint(Graphics g) {
         if (ct == null) ct = buf.getGraphics();
 
@@ -431,19 +426,19 @@ public class RPG1 extends Frame implements Runnable {
 
         if (keyDirection == 1 && map[y - 1][x] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString(cnvStr("こんにちは、少尉。"), 25, 50);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
         if (keyDirection == 2 && map[y + 1][x] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString(cnvStr("こんにちは、少尉。"), 25, 50);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
         if (keyDirection == 3 && map[y][x + 1] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString(cnvStr("こんにちは、少尉。"), 25, 50);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
         if (keyDirection == 4 && map[y][x - 1] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString(cnvStr("こんにちは、少尉。"), 25, 50);
+            ct.drawString("こんにちは、少尉。", 25, 50);
         }
 
         var i = getInsets();
