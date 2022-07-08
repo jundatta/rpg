@@ -1,15 +1,15 @@
-// ã€ä½œè€…ã€‘ã‚°ã‚¡ãƒ³ãƒ»ãƒ•ã‚¡ãƒ³ãƒŸãƒ³ï¼ˆé›»å­ç§‘ï¼‰ã•ã‚“
-// Javaã§ã‚²ãƒ¼ãƒ ã‚’ä½œã‚‹ï¼ˆå‰ç·¨ï¼‰ï¼
+// yìÒzƒOƒ@ƒ“Eƒtƒ@ƒ“ƒ~ƒ“i“dq‰Èj‚³‚ñ
+// Java‚ÅƒQ[ƒ€‚ğì‚éi‘O•ÒjI
 //   https://www.youtube.com/watch?v=Cy5IqYeqiIo
-// Javaã§ã‚²ãƒ¼ãƒ ã‚’ä½œã‚‹ï¼ˆä¸­ç·¨ï¼‰ï¼
+// Java‚ÅƒQ[ƒ€‚ğì‚éi’†•ÒjI
 //   https://www.youtube.com/watch?v=XnaTvzn7UPU
-// Javaã§ã‚²ãƒ¼ãƒ ã‚’ä½œã‚‹ï¼ˆå¾Œç·¨ï¼‰ï¼
+// Java‚ÅƒQ[ƒ€‚ğì‚éiŒã•ÒjI
 //   https://www.youtube.com/watch?v=CPtEV8aygXI
-// ã€ç§»æ¤ã€‘TN8001ï¼ˆPC-8001ï¼‰ã•ã‚“
+// yˆÚAzTN8001iPC-8001j‚³‚ñ
 // https://gist.github.com/TN8001/7b65499db03af5230f5c39001e70a32e
 
 
-// [ã€ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã€‘Javaã§ã‚²ãƒ¼ãƒ ã‚’ä½œã‚‹ï¼ˆå¾Œç·¨ï¼‰ï¼Javaã§ã€Œç°¡å˜ãªRPGã€ã‚’ä½œã‚‹ãŸã‚ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ æ–¹æ³•ã«ã¤ã„ã¦è§£èª¬ï¼åˆç´šè€…å‘ã‘ã§ã™ã€‚â˜†ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°â˜†ã‚²ãƒ¼ãƒ â˜†java - YouTube](https://www.youtube.com/watch?v=CPtEV8aygXI)
+// [yƒvƒƒOƒ‰ƒ€zJava‚ÅƒQ[ƒ€‚ğì‚éiŒã•ÒjIJava‚ÅuŠÈ’P‚ÈRPGv‚ğì‚é‚½‚ß‚ÌƒvƒƒOƒ‰ƒ€•û–@‚É‚Â‚¢‚Ä‰ğàI‰‹‰ÒŒü‚¯‚Å‚·B™ƒvƒƒOƒ‰ƒ~ƒ“ƒO™ƒQ[ƒ€™java - YouTube](https://www.youtube.com/watch?v=CPtEV8aygXI)
 
 
 import javax.imageio.ImageIO;
@@ -17,6 +17,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.io.UnsupportedEncodingException;
 
 public class RPG1 extends Frame implements Runnable {
     public static void main(String[] args) { new RPG1(); }
@@ -91,6 +93,7 @@ public class RPG1 extends Frame implements Runnable {
 
         addWindowListener(new WindowAdapter() {
             @Override public void windowOpened(WindowEvent e) {
+            	System.out.println(System.getProperty("file.encoding"));
                 start();
             }
 
@@ -299,6 +302,10 @@ public class RPG1 extends Frame implements Runnable {
         paint(g);
     }
 
+	private String cnvStr(String utf8) {
+		return utf8;
+	}
+	
     public void paint(Graphics g) {
         if (ct == null) ct = buf.getGraphics();
 
@@ -406,37 +413,37 @@ public class RPG1 extends Frame implements Runnable {
 
         if (keyDirection == 1 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã‚´ãƒ¼ãƒ«", 55, 50);
+            ct.drawString("ƒS[ƒ‹", 55, 50);
         }
         if (keyDirection == 2 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã‚´ãƒ¼ãƒ«", 55, 50);
+            ct.drawString("ƒS[ƒ‹", 55, 50);
         }
         if (keyDirection == 3 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã‚´ãƒ¼ãƒ«", 55, 50);
+            ct.drawString("ƒS[ƒ‹", 55, 50);
         }
         if (keyDirection == 4 && map[y][x] == 8 && goal == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã‚´ãƒ¼ãƒ«", 55, 50);
+            ct.drawString("ƒS[ƒ‹", 55, 50);
         }
 
 
         if (keyDirection == 1 && map[y - 1][x] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã“ã‚“ã«ã¡ã¯ã€å°‘å°‰ã€‚", 25, 50);
+            ct.drawString(cnvStr("‚±‚ñ‚É‚¿‚ÍA­ˆÑB"), 25, 50);
         }
         if (keyDirection == 2 && map[y + 1][x] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã“ã‚“ã«ã¡ã¯ã€å°‘å°‰ã€‚", 25, 50);
+            ct.drawString(cnvStr("‚±‚ñ‚É‚¿‚ÍA­ˆÑB"), 25, 50);
         }
         if (keyDirection == 3 && map[y][x + 1] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã“ã‚“ã«ã¡ã¯ã€å°‘å°‰ã€‚", 25, 50);
+            ct.drawString(cnvStr("‚±‚ñ‚É‚¿‚ÍA­ˆÑB"), 25, 50);
         }
         if (keyDirection == 4 && map[y][x - 1] == 9 && A == true) {
             ct.setColor(Color.blue);
-            ct.drawString("ã“ã‚“ã«ã¡ã¯ã€å°‘å°‰ã€‚", 25, 50);
+            ct.drawString(cnvStr("‚±‚ñ‚É‚¿‚ÍA­ˆÑB"), 25, 50);
         }
 
         var i = getInsets();
