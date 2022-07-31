@@ -153,7 +153,7 @@ void init() {
 
 void setup() {
   init();
-  size(144, 144);
+  size(512, 512, P2D);
   ct = new CTPGraphics(width, height);
 }
 
@@ -234,6 +234,7 @@ void draw() {
 }
 
 void paint() {
+  ct.pg.beginDraw();
   for (i = 0; i < 9; i++) {
     for (j = 0; j < 9; j++) {
       a = map[y - 4 + j][x - 4 + i];
@@ -272,7 +273,6 @@ void paint() {
       }
     }
   }
-
 
   if (keyDirection == 1) {
     if (keySpace == true && ken1flag == true)
@@ -370,6 +370,7 @@ void paint() {
     ct.setColor(Color.blue);
     ct.drawString("こんにちは、少尉。", 25, 50);
   }
+  ct.pg.endDraw();
 
   image(ct.pg, 0, 0);
 }
