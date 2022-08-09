@@ -129,9 +129,6 @@ class DirectionDown extends Direction {
   DirectionDown() {
     super(0, 0, 16);
   }
-  @Override int nextX(int x) {
-    return x;
-  }
   @Override int nextY(int y) {
     return y + 1;
   }
@@ -143,9 +140,6 @@ class DirectionLeft extends Direction {
   @Override int nextX(int x) {
     return x - 1;
   }
-  @Override int nextY(int y) {
-    return y;
-  }
 }
 class DirectionRight extends Direction {
   DirectionRight() {
@@ -154,16 +148,10 @@ class DirectionRight extends Direction {
   @Override int nextX(int x) {
     return x + 1;
   }
-  @Override int nextY(int y) {
-    return y;
-  }
 }
 class DirectionUp extends Direction {
   DirectionUp() {
     super(3, 0, -16);
-  }
-  @Override int nextX(int x) {
-    return x;
   }
   @Override int nextY(int y) {
     return y - 1;
@@ -302,7 +290,7 @@ class Message {
 // [linux-man/ptmx: Use Tiled maps on your Processing sketch.](https://github.com/linux-man/ptmx)
 
 // 微妙に気が利かないのでちょい拡張
-static class PtmxEx extends Ptmx {
+class PtmxEx extends Ptmx {
   private IntDict layerDict = new IntDict();
   private ArrayList<TmxObject> allObjects = new ArrayList<>();
   private HashMap<String, ArrayList<TmxObject>> objectsDict = new HashMap<>();
@@ -354,7 +342,7 @@ static class PtmxEx extends Ptmx {
   }
 }
 
-static class TmxObject {
+class TmxObject {
   private StringDict dict;
   private PVector tileSize;
   private String layerName;

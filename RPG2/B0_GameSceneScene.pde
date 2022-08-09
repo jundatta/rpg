@@ -25,6 +25,8 @@ import java.util.Objects;
 import ptmx.*;
 
 class GameSceneScene extends GameScene {
+  final int demoSec = 6;  // RPG2のデモ秒数
+  
   PGraphics pg;
   HashMap<Integer, Boolean> keyMap = new HashMap<>();
 
@@ -122,34 +124,55 @@ class GameSceneScene extends GameScene {
     if (keyMap.containsKey(keyCode)) keyMap.put(keyCode, false);
   }
 
-  enum Direction {
-    DOWN(0, 16), LEFT(-16, 0), RIGHT(16, 0), UP(0, -16);
-
+  class Direction {
+    int index;
     int dx, dy;
 
-    private Direction(int dx, int dy) {
+    Direction(int index, int dx, int dy) {
+      this.index = index;
       this.dx = dx;
       this.dy = dy;
     }
-
+    int ordinal() {
+      return index;
+    }
     int nextX(int x) {
-      switch (this) {
-      case LEFT:
-        return x - 1;
-      case RIGHT:
-        return x + 1;
-      }
       return x;
     }
-
     int nextY(int y) {
-      switch (this) {
-      case UP:
-        return y - 1;
-      case DOWN:
-        return y + 1;
-      }
       return y;
+    }
+  }
+  class DirectionDown extends Direction {
+    DirectionDown() {
+      super(0, 0, 16);
+    }
+    @Override int nextY(int y) {
+      return y + 1;
+    }
+  }
+  class DirectionLeft extends Direction {
+    DirectionLeft() {
+      super(1, -16, 0);
+    }
+    @Override int nextX(int x) {
+      return x - 1;
+    }
+  }
+  class DirectionRight extends Direction {
+    DirectionRight() {
+      super(2, 16, 0);
+    }
+    @Override int nextX(int x) {
+      return x + 1;
+    }
+  }
+  class DirectionUp extends Direction {
+    DirectionUp() {
+      super(3, 0, -16);
+    }
+    @Override int nextY(int y) {
+      return y - 1;
     }
   }
 
@@ -170,7 +193,7 @@ class GameSceneScene extends GameScene {
 
   class Player {
     int x, y, anime;
-    Direction direction = Direction.DOWN;
+    Direction direction = new DirectionDown();
     PImage img;
     Weapon weapon;
     boolean isSwinging;
@@ -190,16 +213,16 @@ class GameSceneScene extends GameScene {
       // 斜めに進めないように else if
       if (keyMap.get(LEFT)) {
         x--;
-        direction = Direction.LEFT;
+        direction = new DirectionLeft();
       } else if (keyMap.get(RIGHT)) {
         x++;
-        direction = Direction.RIGHT;
+        direction = new DirectionRight();
       } else if (keyMap.get(UP)) {
         y--;
-        direction = Direction.UP;
+        direction = new DirectionUp();
       } else if (keyMap.get(DOWN)) {
         y++;
-        direction = Direction.DOWN;
+        direction = new DirectionDown();
       }
 
       if (0 < map.getTileIndex("障害物", x, y)) {
@@ -285,7 +308,7 @@ class GameSceneScene extends GameScene {
   // [linux-man/ptmx: Use Tiled maps on your Processing sketch.](https://github.com/linux-man/ptmx)
 
   // 微妙に気が利かないのでちょい拡張
-  static class PtmxEx extends Ptmx {
+  class PtmxEx extends Ptmx {
     private IntDict layerDict = new IntDict();
     private ArrayList<TmxObject> allObjects = new ArrayList<>();
     private HashMap<String, ArrayList<TmxObject>> objectsDict = new HashMap<>();
@@ -337,7 +360,7 @@ class GameSceneScene extends GameScene {
     }
   }
 
-  static class TmxObject {
+  class TmxObject {
     private StringDict dict;
     private PVector tileSize;
     private String layerName;
