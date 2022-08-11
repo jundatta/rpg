@@ -77,9 +77,10 @@ void initMap() {
 void draw() {
   player.update();
 
+  pg.beginDraw();
   map.draw(pg, player.x, player.y);
-
   player.draw(pg);
+  pg.endDraw();
 
   push();
   translate(width/2, height/2);
@@ -158,6 +159,20 @@ class DirectionUp extends Direction {
   }
 }
 
+static class Original {
+  static void copy(PImage src, int sx, int sy, PImage dst, int dx, int dy, int dw, int dh) {
+    for (int y = 0; y < dh; y++) {
+      for (int x = 0; x < dw; x++) {
+        color c = src.get(sx+x, sy+y);
+        if ((c & 0xff000000) == 0x00000000) {
+          continue;  // 透明なので飛ばす
+        }
+        dst.set(dx+x, dy+y, c);
+      }
+    }
+  }
+}
+
 class Weapon {
   PImage img;
 
@@ -169,7 +184,8 @@ class Weapon {
     var sx = direction.ordinal(); // 0123
     var dx = direction.dx;
     var dy = direction.dy;
-    pg.copy(img, sx * 16, 0, 16, 16, -8 + dx, -8 + dy, 16, 16); // imageMode(CENTER) 効かない
+    //pg.copy(img, sx * 16, 0, 16, 16, -8 + dx, -8 + dy, 16, 16); // imageMode(CENTER) 効かない
+    Original.copy(img, sx * 16, 0, pg, pg.width/2-8+dx, pg.height/2-8+dy, 16, 16);
   }
 }
 
@@ -247,7 +263,8 @@ class Player {
     var sx = anime % 2;
     if (keyMap.get(SPACE)) sx = 2;
     var sy = direction.ordinal(); // 0123
-    pg.copy(img, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16); // imageMode(CENTER) 効かない
+    //pg.copy(img, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16); // imageMode(CENTER) 効かない
+    Original.copy(img, sx * 16, sy * 16, pg, pg.width/2-8, pg.height/2-8, 16, 16);
 
     if (isSwinging && weapon != null) weapon.draw(pg, direction);
   }
