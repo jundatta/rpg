@@ -20,7 +20,7 @@ Message message = new Message();
 
 
 void setup() {
-  size(288, 288);
+  size(288, 288, P3D);
   frameRate(10);
   noSmooth();
   imageMode(CENTER);
@@ -75,16 +75,16 @@ void initMap() {
 }
 
 void draw() {
-  push();
-  translate(width/2, height/2);
-  scale(2);
-
   player.update();
 
   map.draw(pg, player.x, player.y);
-  image(pg, 0, 0);
 
-  player.draw();
+  player.draw(pg);
+
+  push();
+  translate(width/2, height/2);
+  scale(2);
+  image(pg, 0, 0);
   pop();
 
   message.draw();
@@ -165,11 +165,11 @@ class Weapon {
     img = loadImage(path).get(x, y, 64, 16);
   }
 
-  void draw(Direction direction) {
+  void draw(PGraphics pg, Direction direction) {
     var sx = direction.ordinal(); // 0123
     var dx = direction.dx;
     var dy = direction.dy;
-    copy(img, sx * 16, 0, 16, 16, -8 + dx, -8 + dy, 16, 16); // imageMode(CENTER) 効かない
+    pg.copy(img, sx * 16, 0, 16, 16, -8 + dx, -8 + dy, 16, 16); // imageMode(CENTER) 効かない
   }
 }
 
@@ -243,13 +243,13 @@ class Player {
     }
   }
 
-  void draw() {
+  void draw(PGraphics pg) {
     var sx = anime % 2;
     if (keyMap.get(SPACE)) sx = 2;
     var sy = direction.ordinal(); // 0123
-    copy(img, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16); // imageMode(CENTER) 効かない
+    pg.copy(img, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16); // imageMode(CENTER) 効かない
 
-    if (isSwinging && weapon != null) weapon.draw(direction);
+    if (isSwinging && weapon != null) weapon.draw(pg, direction);
   }
 }
 
