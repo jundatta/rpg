@@ -5,6 +5,8 @@ class GameScenePlay extends GameSceneScene {
     if (key == ESC) {
       key = 0;  // プログラムが終了しないように書き換えた
       gGameStack.push(new GameScenePause());
+      return;
     }
+    super.keyPressed();
   }
 }
