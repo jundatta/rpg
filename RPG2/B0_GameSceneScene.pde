@@ -26,7 +26,7 @@ import ptmx.*;
 
 class GameSceneScene extends GameScene {
   final int demoSec = 6;  // RPG2のデモ秒数
-  
+
   PGraphics pg;
   HashMap<Integer, Boolean> keyMap = new HashMap<>();
 
@@ -95,26 +95,25 @@ class GameSceneScene extends GameScene {
   }
 
   @Override void draw() {
-    push();
-    translate(width/2, height/2);
-    scale(2);
-
     player.update();
 
+    pg.beginDraw();
     map.draw(pg, player.x, player.y);
-    image(pg, 0, 0);
+    player.draw(pg);
+    pg.endDraw();
 
-    player.draw();
+    push();
+    translate(width/2, height/2);
+    scale(4);
+    image(pg, 0, 0);
     pop();
 
     message.draw();
 
     if (goal.getVisible()  && player.x == goal.getX() && player.y == goal.getY()) {
-      fill(0, 0, 255);
-      textSize(48);
-      textAlign(CENTER, CENTER);
-      text("ゴール", 0, 0, width, height/2);
-      noLoop();
+      // コングラチュレーション画面へとべよー
+      gCongratulations.jump();
+      return;
     }
   }
   @Override void keyPressed() {
@@ -183,11 +182,12 @@ class GameSceneScene extends GameScene {
       img = loadImage(path).get(x, y, 64, 16);
     }
 
-    void draw(Direction direction) {
+    void draw(PGraphics pg, Direction direction) {
       var sx = direction.ordinal(); // 0123
       var dx = direction.dx;
       var dy = direction.dy;
-      copy(img, sx * 16, 0, 16, 16, -8 + dx, -8 + dy, 16, 16); // imageMode(CENTER) 効かない
+      //copy(img, sx * 16, 0, 16, 16, -8 + dx, -8 + dy, 16, 16); // imageMode(CENTER) 効かない
+      pg.blend(img, sx * 16, 0, 16, 16, pg.width/2-8+dx, pg.height/2-8+dy, 16, 16, BLEND); // imageMode(CENTER) 効かない
     }
   }
 
@@ -261,13 +261,14 @@ class GameSceneScene extends GameScene {
       }
     }
 
-    void draw() {
+    void draw(PGraphics pg) {
       var sx = anime % 2;
       if (keyMap.get(SPACE)) sx = 2;
       var sy = direction.ordinal(); // 0123
-      copy(img, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16); // imageMode(CENTER) 効かない
+      //copy(img, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16); // imageMode(CENTER) 効かない
+      pg.blend(img, sx * 16, sy * 16, 16, 16, pg.width/2-8, pg.height/2-8, 16, 16, BLEND); // imageMode(CENTER) 効かない
 
-      if (isSwinging && weapon != null) weapon.draw(direction);
+      if (isSwinging && weapon != null) weapon.draw(pg, direction);
     }
   }
 
@@ -287,11 +288,11 @@ class GameSceneScene extends GameScene {
       noFill();
       stroke(50);
       strokeWeight(3);
-      rect(20, 20, width - 20, height/2 - 34, 8);
+      rect(20, 20, width - 20, height/4 - 34, 8);
 
       fill(50);
       var i = message.length() < index ? message.length() : index;
-      text(message.substring(0, i), 24, 22, width - 23, height/2 - 32);
+      text(message.substring(0, i), 24, 22, width - 23, height/4 - 32);
 
       index += frameCount % 2 == 0 ? 1 : 0;
       if (message.length() * 3 < index) {
